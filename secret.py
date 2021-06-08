@@ -1,0 +1,3 @@
+
+RANDOM_ORG_TOKEN = ''
+VK_TOKEN = ''
