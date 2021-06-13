@@ -1,0 +1,201 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "$id": "4. docs_items_scheme.json",
+  "title": "Объект ответа на запрос",
+  "description": "Описывает детализированную информацию о документах возвращаемых методом docs.get",
+  "type": "object",
+  "properties": {
+    "response": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "description": "Сколько всего документов у пользователя"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "Описание документа",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "description": "Идентификатор документа"
+              },
+              "owner_id": {
+                "type": "integer",
+                "description": "Идентификатор владельца документа"
+              },
+              "title": {
+                "type": "string",
+                "description": "Название документа"
+              },
+              "size": {
+                "type": "integer",
+                "description": "Размер документа в байтах",
+                "minimum": 1
+              },
+              "ext": {
+                "type": "string",
+                "description": "Расширение документа"
+              },
+              "url": {
+                "type": "string",
+                "description": "Адрес по которому можно загрузить документ",
+                "format": "uri-template"
+              },
+              "date": {
+                "type": "integer",
+                "description": "Дата загрузки документа в unixtime формате",
+                "minimum": 1101859200
+              },
+              "type": {
+                "type": "integer",
+                "description": "Код типа документа",
+                "enum": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8
+                ]
+              },
+              "preview": {
+                "type": "object",
+                "description": "Информация предворительного просмотра документа",
+                "properties": {
+                  "photo": {
+                    "type": "object",
+                    "description": "Изображение для просмотра",
+                    "properties": {
+                      "sizes": {
+                        "type": "array",
+                        "description": "Массив с размерами фотографий",
+                        "items": {
+                          "type": "object",
+                          "description": "Объект размера фотографии",
+                          "properties": {
+                            "src": {
+                              "type": "string",
+                              "description": "Ссылка на фотографию",
+                              "format": "uri-format"
+                            },
+                            "width": {
+                              "type": ["integer", "undefined"],
+                              "description": "Ширина копии в пикселах"
+                            },
+                            "height": {
+                              "height": {
+                                "type": ["integer", "null"],
+                                "description": "Высота копии в пикселах"
+                              }
+                            },
+                            "type": {
+                              "type": "string",
+                              "description": "Тип размера фотографии",
+                              "enum": [
+                                "s",
+                                "m",
+                                "o",
+                                "x",
+                                "y",
+                                "z"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "src",
+                            "width",
+                            "height",
+                            "type"
+                          ],
+                          "additionalProperties": false
+                        }
+                      }
+                    }
+                  },
+                  "graffiti": {
+                    "type": "object",
+                    "description": "Информация о граффити",
+                    "properties": {
+                      "src": {
+                        "type": "string",
+                        "description": "Ссылка на фотографию",
+                        "format": "uri-format"
+                      },
+                      "width": {
+                        "width": {
+                          "type": ["integer", "null"],
+                          "description": "Ширина копии в пикселах"
+                        }
+                      },
+                      "height": {
+                        "height": {
+                          "type": ["integer", "null"],
+                          "description": "Высота копии в пикселах"
+                        }
+                      }
+                    },
+                    "required": [
+                      "src",
+                      "width",
+                      "height"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "audio_message": {
+                    "duration": {
+                      "type": "integer",
+                      "description": "Длительность сообщения в секундах",
+                      "waveform": {
+                        "type": "array",
+                        "description": "Массив значений для визуального отображения звука",
+                        "items": {
+                          "type": "integer"
+                        }
+                      },
+                      "link_ogg": {
+                        "type": "string",
+                        "description": "URL .ogg файла",
+                        "format": "uri-format"
+                      },
+                      "link_mp3": {
+                        "type": "string",
+                        "description": "URL .mp3 файла",
+                        "format": "uri-format"
+                      }
+                    }
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "id",
+              "owner_id",
+              "title",
+              "size",
+              "ext",
+              "url",
+              "date",
+              "type"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "count",
+        "items"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "response"
+  ],
+  "additionalProperties": false
+}

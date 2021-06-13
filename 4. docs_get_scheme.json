@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "$id": "4. docs_get_scheme.json",
+  "title": "Вызов метода docs.get",
+  "description": "Описывает детализированную информацию вызова метода VK API docs.get",
+  "type": "object",
+  "properties": {
+    "access_token": {
+      "description": "Ключ доступа пользователя",
+      "type": "string"
+    },
+    "v": {
+      "description": "Версия API",
+      "type": "string",
+      "enum": [
+        "5.131",
+        "5.44",
+        "5.21"
+      ]
+    },
+    "count": {
+      "description": "Количество документов, информацию о которых нужно вернуть",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 2000
+    },
+    "offset": {
+      "description": "Смещение, необходимое для выборки определенного подмножества документов",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1999
+    },
+    "type": {
+      "description": "Фильтр по типу документа",
+      "type": "integer",
+      "default": 0,
+      "minimum": 0,
+      "maximum": 8,
+      "enum": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "enumNames": [
+        "all",
+        "text",
+        "archive",
+        "gif",
+        "image",
+        "audio",
+        "video",
+        "ebook",
+        "default"
+      ]
+    },
+    "owner_id": {
+      "description": "Идентификатор пользователя или сообщества, которому принадлежат документы. Идентификатор сообщества должен быть передан со знаком \"-\"",
+      "type": "integer",
+      "default": 53806488
+    },
+    "returns_tage": {
+      "description": "Нужно ли возвращать теги",
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": ["access_token", "v"]
+}
